@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import AddTodo from "./components/AddTodo/AddTodo";
+import EditTodo from "./components/EditTodo/EditTodo";
 import TodoList from "./components/TodoList/TodoList";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+
+  const [editedObj, setEditedObj] = useState(null);
 
   console.log(todos);
 
@@ -23,10 +26,24 @@ const App = () => {
     setTodos(newTodos);
   }
 
+  function getEditedObj(id) {
+    let oneObj = todos.find((item) => item.id === id);
+    setEditedObj(oneObj);
+  }
+
   return (
     <>
       <AddTodo handleTask={handleTask} />
-      <TodoList todos={todos} changeStatus={changeStatus} />
+      <TodoList
+        todos={todos}
+        changeStatus={changeStatus}
+        getEditedObj={getEditedObj}
+      />
+      {editedObj ? (
+        <EditTodo editedObj={editedObj} />
+      ) : (
+        <h4>Not editing todo now</h4>
+      )}
     </>
   );
 };
