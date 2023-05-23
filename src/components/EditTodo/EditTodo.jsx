@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const EditTodo = ({ editedObj }) => {
+const EditTodo = ({ editedObj, saveChanges }) => {
   const [editedTodo, setEditedTodo] = useState(editedObj);
 
   function editTodo(e) {
@@ -8,14 +8,14 @@ const EditTodo = ({ editedObj }) => {
   }
 
   function handleSaveChanges() {
-    console.log(editedTodo);
+    saveChanges(editedTodo);
   }
 
   return (
     <div>
       <h2>Edit TODO Component</h2>
       <input type="text" onChange={editTodo} value={editedTodo.task} />
-      <button>Save Changes</button>
+      <button onClick={handleSaveChanges}>Save Changes</button>
     </div>
   );
 };

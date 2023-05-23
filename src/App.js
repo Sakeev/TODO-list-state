@@ -31,6 +31,19 @@ const App = () => {
     setEditedObj(oneObj);
   }
 
+  function saveChanges(newObj) {
+    let newTodos = [...todos];
+    newTodos = newTodos.map((item) => {
+      if (item.id === newObj.id) {
+        return newObj;
+      } else {
+        return item;
+      }
+    });
+    setTodos(newTodos);
+    setEditedObj(null);
+  }
+
   return (
     <>
       <AddTodo handleTask={handleTask} />
@@ -40,7 +53,7 @@ const App = () => {
         getEditedObj={getEditedObj}
       />
       {editedObj ? (
-        <EditTodo editedObj={editedObj} />
+        <EditTodo editedObj={editedObj} saveChanges={saveChanges} />
       ) : (
         <h4>Not editing todo now</h4>
       )}
